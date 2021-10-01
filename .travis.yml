@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - node
+cache:
+  directories:
+    - node_modules
+script:
+  - npm run test:unit
+after_success:
+  - npm run build
+  
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: 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
+  keep_history: true,
+  local_dir: dist
+  on:
+    branch: master
