@@ -1,5 +1,7 @@
 # plan2meet
 
+ECSE-428 Fall 2021 Project 
+
 ## Project setup
 ```
 npm install
