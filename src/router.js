@@ -3,6 +3,7 @@ import Login from './components/Login.vue';
 import SignUp from './components/SignUp.vue';
 import AddNewUser from './components/AddNewUser.vue';
 import CreateEvent from './components/CreateEvent.vue';
+import ViewCalendar from './components/ViewCalendar.vue';
 import {createRouter, createWebHistory} from "vue-router";
 
 const routes = [
@@ -33,6 +34,11 @@ const routes = [
         path:'/create-event'
 
     },
+    {
+        name: 'Calendar',
+        component: ViewCalendar,
+        path:'/calendar'
+    }
 ];
 
 const router = createRouter({

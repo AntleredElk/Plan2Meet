@@ -20,7 +20,24 @@
       "date": "2021-10-17",
       "time": "00:37",
       "location": "mcgill ",
-      "id": 1
+      "id": 1,
+      "availibility":[]
+    }
+  ],
+  "availibility": [
+    {
+      "user": "1",
+      "event": "event1",
+      "date": "2021-10-17",
+      "startTime": "01:00",
+      "endTime": "03:00"
+    },
+    {
+      "user": "2",
+      "event": "event2",
+      "date": "2021-10-17",
+      "startTime": "01:00",
+      "endTime": "03:00"
     }
   ]
 }
