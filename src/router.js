@@ -1,6 +1,8 @@
 import Home from './components/Home.vue';
 import Login from './components/Login.vue';
 import SignUp from './components/SignUp.vue';
+import CreateEvent from './components/CreateEvent.vue';
+import DeleteEvent from './components/DeleteEvent.vue';
 import {createRouter, createWebHistory} from "vue-router";
 
 const routes = [
@@ -18,6 +20,20 @@ const routes = [
         name: 'SignUp',
         component: SignUp,
         path:'/sign-up'
+
+    },
+
+    {
+        name: 'CreateEvent',
+        component: CreateEvent,
+        path:'/create-event'
+
+    },
+
+    {
+        name: 'DeleteEvent',
+        component: DeleteEvent,
+        path:'/delete-event'
 
     }
 ];

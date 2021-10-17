@@ -14,11 +14,18 @@ export default {
         }
         
     },
+    // mounted()
+    // {
+    //     let user = localStorage.getItem('user-info');
+    //     if(!user){
+    //         this.$router.push({name:'Login'})
+    //     }
+    // }
     mounted()
     {
         let user = localStorage.getItem('user-info');
         if(!user){
-            this.$router.push({name:'Login'})
+            this.$router.push({name:'CreateEvent'})
         }
     }
 
