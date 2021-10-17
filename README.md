@@ -18,6 +18,13 @@ npm run build
 ```
 npm run lint
 ```
-
+### Json server setup
+```
+npm install -g jason server
+```
+### Stores data in json
+```
+json-server --watch db.json
+```
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
