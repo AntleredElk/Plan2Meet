@@ -1,5 +1,26 @@
 {
   "user": [
-
+    {
+      "name": "2",
+      "email": "2",
+      "password": "2",
+      "id": 2
+    },
+    {
+      "name": "1",
+      "email": "1",
+      "password": "1",
+      "event": "1",
+      "id": 3
+    }
+  ],
+  "event": [
+    {
+      "name": "event1",
+      "date": "2021-10-17",
+      "time": "00:37",
+      "location": "mcgill ",
+      "id": 1
+    }
   ]
 }

@@ -1,5 +1,5 @@
 <template>
-    <a v-on:click="logout" href="#">Logout</a>
+    <a v-on:click="logout" href="#">Logout</a> 
     <h1>Welcome to Home Page</h1>
     <p>this page needs to be updated with the plan2meet app contents </p>
 </template>
@@ -21,6 +21,8 @@ export default {
             this.$router.push({name:'Login'})
         }
     }
+    
+
 
 }
 </script>
