@@ -20,7 +20,8 @@ export default {
         return {
             name:'',
             email:'',
-            password:''
+            password:'',
+            event:''
         }
     },
     methods:{
