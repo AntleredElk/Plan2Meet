@@ -3,6 +3,7 @@ import Login from './components/Login.vue';
 import SignUp from './components/SignUp.vue';
 import CreateEvent from './components/CreateEvent.vue';
 import DeleteEvent from './components/DeleteEvent.vue';
+import ViewEvents from './components/ViewEvents.vue';
 import {createRouter, createWebHistory} from "vue-router";
 
 const routes = [
@@ -34,6 +35,12 @@ const routes = [
         name: 'DeleteEvent',
         component: DeleteEvent,
         path:'/delete-event'
+
+    },
+    {
+        name: 'ViewEvents',
+        component: ViewEvents,
+        path:'/view-events'
 
     }
 ];
