@@ -1,0 +1,55 @@
+{
+  "user": [
+    {
+      "name": "1",
+      "email": "1",
+      "password": "1",
+      "event": "1",
+      "id": 3
+    },
+    {
+      "name": "2",
+      "email": "2",
+      "password": "2",
+      "event": "2",
+      "id": 4
+    }
+  ],
+  "event": [
+    {
+      "name": "event1",
+      "date": "2021-10-17",
+      "time": "00:37",
+      "location": "mcgill ",
+      "id": 1
+    },
+    {
+      "name": "test",
+      "date": "2021-10-19",
+      "time": "01:13",
+      "location": "tests",
+      "id": 2
+    },
+    {
+      "name": "test",
+      "date": "2021-10-20",
+      "time": "01:04",
+      "location": "test",
+      "id": 3
+    },
+    {
+      "name": "test",
+      "date": "2021-10-20",
+      "time": "01:04",
+      "location": "test",
+      "id": 4
+    },
+    {
+      "name": "Porject Meeting",
+      "date": "2021-10-29",
+      "time": "14:15",
+      "location": "Mcgill",
+      "id": 5
+    }
+  ]
+}
