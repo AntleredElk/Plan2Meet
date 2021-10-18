@@ -41,7 +41,9 @@ export default {
                 date: this.date,
                 time: this.time,
                 location: this.location
+
             });
+
             console.warn(result);
             if(result.status==201)
             {              

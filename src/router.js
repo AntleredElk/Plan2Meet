@@ -1,8 +1,9 @@
 import Home from './components/Home.vue';
 import Login from './components/Login.vue';
 import SignUp from './components/SignUp.vue';
-import AddNewUser from './components/AddNewUser.vue';
 import CreateEvent from './components/CreateEvent.vue';
+import DeleteEvent from './components/DeleteEvent.vue';
+import AddNewUser from './components/AddNewUser.vue';
 import {createRouter, createWebHistory} from "vue-router";
 
 const routes = [
@@ -33,6 +34,13 @@ const routes = [
         path:'/create-event'
 
     },
+
+    {
+        name: 'DeleteEvent',
+        component: DeleteEvent,
+        path:'/delete-event'
+
+    }
 ];
 
 const router = createRouter({
