@@ -11,9 +11,12 @@
     <p>
         <router-link to="/delete-event"> Would you like to delete an Event? </router-link>
     </p>
+<<<<<<< HEAD
     <p>
         <router-link to="/AddNewUser"> Would you like to add a new user to an Event? </router-link>
     </p>
+=======
+>>>>>>> Implement create new event and delete event features
 
 </div>
 </template>
@@ -41,7 +44,13 @@ export default {
                 date: this.date,
                 time: this.time,
                 location: this.location
+<<<<<<< HEAD
             });
+=======
+
+            });
+
+>>>>>>> Implement create new event and delete event features
             console.warn(result);
             if(result.status==201)
             {              
@@ -59,5 +68,9 @@ export default {
     //         this.$router.push({name:'Home'})
     //     }
     // }
+<<<<<<< HEAD
+=======
+
+>>>>>>> Implement create new event and delete event features
 }
 </script>
