@@ -28,6 +28,8 @@
 </center>
 
     <p>
+      <button @click="created()" type="buton">Refresh</button>
+      <br />
       <router-link to="/create-event"> Back Home </router-link>
     </p>
   </div>
@@ -46,12 +48,8 @@ export default {
 },
   methods: {
     async created(){
-      try{
-        let allEvents = await axios.get("http://localhost:3000/event/");
+        let allEvents = await axios.get("http://localhost:3000/event");
         this.events = allEvents.data;
-      } catch(e){
-        console.error(e);
-      }
     }
 
   }
