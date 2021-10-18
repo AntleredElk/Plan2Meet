@@ -1,0 +1,12 @@
+{
+  "user": [],
+  "event": [
+    {
+      "name": "test",
+      "date": "2021-10-14",
+      "time": "01:23",
+      "location": "test",
+      "id": 1
+    }
+  ]
+}
