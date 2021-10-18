@@ -1,6 +1,14 @@
 <template>
   <img class="logo" src="../assets/plan2meetLogo.svg" />
   <h1>View Events</h1>
+  <br />
+  <input type="text" v-model="id_name" placeholder="Search by ID or Name" />
+  <button v-on:click="searchID"> Search</button>
+  <br />
+  <input type="date" v-model="date" placeholder="Search by Date" />
+  <button v-on:click="searchDate"> Search</button>
+
+
   <div class="viewEvents">
 
 <center>
@@ -16,11 +24,11 @@
         </thead>
         <tbody>
             <tr v-for="event in events" :key="event.id">
-            <td width="20%">{{event.id}}</td>
-            <td width="20%">{{event.name}}</td>
-            <td width="20%">{{event.date}}</td>
-            <td width="20%">{{event.time}}</td>
-            <td width="20%">{{event.location}}</td>
+            <td>{{event.id}}</td>
+            <td>{{event.name}}</td>
+            <td>{{event.date}}</td>
+            <td>{{event.time}}</td>
+            <td>{{event.location}}</td>
             </tr>
 
         </tbody>
@@ -28,7 +36,11 @@
 </center>
 
     <p>
-      <button @click="created()" type="buton">Refresh</button>
+      <span v-if="errorView" style="color: red"
+        >Error: {{ errorView}}
+      </span>
+      <br />
+      <button v-on:click="refresh"> Refresh </button>
       <br />
       <router-link to="/create-event"> Back Home </router-link>
     </p>
@@ -43,13 +55,51 @@ export default {
   name: "ViewEvents",
   data() {
   return {
-    events: []
+    events: [],
+    id_name:'',
+    date:'',
+    errorView:''
   }
 },
   methods: {
-    async created(){
-        let allEvents = await axios.get("http://localhost:3000/event");
-        this.events = allEvents.data;
+    async refresh(){
+      let allEvents = await axios.get("http://localhost:3000/event");
+      this.events = allEvents.data;
+    },
+
+    async searchID(){
+      let allEvents = await axios.get("http://localhost:3000/event");
+
+      var arrayLength = allEvents.data.length;
+      for (var i = 0; i < arrayLength; i++) {
+        if(allEvents.data[i].name == this.id_name || allEvents.data[i].id == this.id_name){
+          console.log("oui")
+          this.events = allEvents.data.slice(i, i + 1)
+          this.errorView = "" 
+          return
+        }
+        else{
+          this.errorView = "Invalid Search" 
+          this.events = allEvents.data.slice(0, 0)
+        }
+      }
+    },
+
+    async searchDate(){
+      let allEvents = await axios.get("http://localhost:3000/event");
+
+      var arrayLength = allEvents.data.length;
+      for (var i = 0; i < arrayLength; i++) {
+        if(allEvents.data[i].date == this.date){
+          this.events = allEvents.data.slice(i, i + 1)
+          this.errorView = "" 
+          return
+        }
+        else{
+          this.errorView = "Invalid Search" 
+          this.events = allEvents.data.slice(0, 0)
+        }
+      }
     }
 
   }

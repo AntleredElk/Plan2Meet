@@ -2,31 +2,31 @@
   "user": [],
   "event": [
     {
-      "name": "test",
-      "date": "2021-10-14",
-      "time": "01:23",
-      "location": "test",
+      "name": "Event1",
+      "date": "2021-08-23",
+      "time": "9:00",
+      "location": "1234 Maple Street, Montreal",
       "id": 1
     },
     {
-      "name": "test1",
-      "date": "2021-10-15",
-      "time": "01:50",
-      "location": "location1",
+      "name": "Event2",
+      "date": "2021-09-23",
+      "time": "9:00",
+      "location": "345 Elm Avenue, Montreal",
       "id": 2
     },
     {
-      "name": "a",
-      "date": "2021-10-21",
-      "time": "20:33",
-      "location": "cv",
+      "name": "Event3",
+      "date": "2021-09-26",
+      "time": "7:00",
+      "location": "345 Elm Avenue, Montreal",
       "id": 3
     },
     {
-      "name": "b",
-      "date": "2021-09-27",
-      "time": "20:36",
-      "location": "e",
+      "name": "Event4",
+      "date": "2021-10-26",
+      "time": "9:00",
+      "location": "345 Elm Avenue, Montreal",
       "id": 4
     }
   ]
