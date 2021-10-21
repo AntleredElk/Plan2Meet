@@ -41,8 +41,6 @@
       </span>
       <br />
       <button v-on:click="refresh"> Refresh </button>
-      <br />
-      <router-link to="/create-event"> Back Home </router-link>
     </p>
   </div>
 </template>

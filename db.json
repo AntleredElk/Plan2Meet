@@ -1,27 +1,27 @@
 {
   "user": [
     {
-      "name": "2",
-      "email": "2",
-      "password": "2",
-      "event": "2",
-      "id": 4
-    },
-    {
-      "name": "1",
-      "email": "1",
-      "password": "1",
-      "event": "Mike",
-      "id": 5
+      "name": "aurel",
+      "email": "aurel@",
+      "password": "a",
+      "event": "event1",
+      "id": 1
     }
   ],
   "event": [
     {
       "name": "event1",
       "date": "2021-10-20",
-      "time": "20:22",
+      "time": "21:10",
       "location": "McGill",
       "id": 1
+    },
+    {
+      "name": "event3",
+      "date": "2021-10-20",
+      "time": "21:11",
+      "location": "McGill",
+      "id": 3
     }
   ]
 }

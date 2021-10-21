@@ -12,12 +12,12 @@ const routes = [
     {
         name: 'Home',
         component: Home,
-        path:'/'
+        path:'/home'
     },
     {
         name: 'Login',
         component: Login,
-        path:'/login'
+        path:'/'
     },
     {
         name: 'SignUp',
@@ -28,7 +28,7 @@ const routes = [
     {
         name:'AddNewUser',
         component: AddNewUser, 
-        path:'/AddNewUser'
+        path:'/add-new-user'
     },
     {
         name: 'CreateEvent',
