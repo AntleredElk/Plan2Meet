@@ -1,9 +1,11 @@
 import Home from './components/Home.vue';
 import Login from './components/Login.vue';
 import SignUp from './components/SignUp.vue';
-import AddNewUser from './components/AddNewUser.vue';
 import CreateEvent from './components/CreateEvent.vue';
 import ViewCalendar from './components/ViewCalendar.vue';
+import DeleteEvent from './components/DeleteEvent.vue';
+import ViewEvents from './components/ViewEvents.vue';
+import AddNewUser from './components/AddNewUser.vue';
 import {createRouter, createWebHistory} from "vue-router";
 
 const routes = [
@@ -35,9 +37,21 @@ const routes = [
 
     },
     {
-        name: 'Calendar',
+        name: 'ViewCalendar',
         component: ViewCalendar,
-        path:'/calendar'
+        path:'/ViewCalendar'
+    },
+    {
+        name:'DeleteEvent',
+        component: DeleteEvent,
+        path:'/delete-event'
+
+    },
+    {
+        name: 'ViewEvents',
+        component: ViewEvents,
+        path:'/view-events'
+
     }
 ];
 

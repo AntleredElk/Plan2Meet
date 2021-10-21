@@ -39,7 +39,7 @@ export default {
                 )
                 if(event.status==200 && result.data.length>0){
                     console.log("event get!")
-                    var eventName = result.data[0].name
+                    var eventName = event.data[0].name
                     //console.log(event.data)
                     let deletedUser = await axios.delete("http://localhost:3000/user/"+result.data[0].id)
                     console.warn(deletedUser);

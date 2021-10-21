@@ -4,40 +4,24 @@
       "name": "2",
       "email": "2",
       "password": "2",
-      "id": 2
+      "event": "2",
+      "id": 4
     },
     {
       "name": "1",
       "email": "1",
       "password": "1",
-      "event": "1",
-      "id": 3
+      "event": "Mike",
+      "id": 5
     }
   ],
   "event": [
     {
       "name": "event1",
-      "date": "2021-10-17",
-      "time": "00:37",
-      "location": "mcgill ",
-      "id": 1,
-      "availibility":[]
-    }
-  ],
-  "availibility": [
-    {
-      "user": "1",
-      "event": "event1",
-      "date": "2021-10-17",
-      "startTime": "01:00",
-      "endTime": "03:00"
-    },
-    {
-      "user": "2",
-      "event": "event2",
-      "date": "2021-10-17",
-      "startTime": "01:00",
-      "endTime": "03:00"
+      "date": "2021-10-20",
+      "time": "20:22",
+      "location": "McGill",
+      "id": 1
     }
   ]
 }
