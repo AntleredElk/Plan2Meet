@@ -37,11 +37,6 @@ const routes = [
 
     },
     {
-        name: 'ViewCalendar',
-        component: ViewCalendar,
-        path:'/ViewCalendar'
-    },
-    {
         name:'DeleteEvent',
         component: DeleteEvent,
         path:'/delete-event'
@@ -52,7 +47,13 @@ const routes = [
         component: ViewEvents,
         path:'/view-events'
 
-    }
+    },
+    {
+        name: 'ViewCalendar',
+        component: ViewCalendar,
+        path:'/ViewCalendar'
+    },
+
 ];
 
 const router = createRouter({
