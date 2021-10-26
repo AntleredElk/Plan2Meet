@@ -1,33 +1,4 @@
 {
-  "user": [
-    {
-      "name": "Aurelia",
-      "email": "aurelia@",
-      "password": "a",
-      "id": 1
-    }
-  ],
-  "event": [
-    {
-      "name": "event 1",
-      "date": "2021-10-28",
-      "time": "16:37",
-      "location": "McGill",
-      "id": 1
-    },
-    {
-      "name": "xy",
-      "date": "2021-10-28",
-      "time": "16:37",
-      "location": "k",
-      "id": 2
-    },
-    {
-      "name": "event3",
-      "date": "2021-10-05",
-      "time": "10:38",
-      "location": "mcgill",
-      "id": 3
-    }
-  ]
+  "user": [],
+  "event": []
 }

@@ -52,7 +52,7 @@
           <option v-for="event in events" v-bind:key="event.id">{{ event.id }} </option>
         </select>
         <br/>
-        Enter New Name: <input v-if="edit" type="text" v-model="editName" placeholder="Name" />
+        Enter New Name: <input v-if="edit" type="text" v-model="editName" ng-attr-placeholder="Name" />
         <br/>
         Enter New Date: <input v-if="edit" type="date" v-model="editDate" placeholder="Date" />
         <br/>
@@ -89,8 +89,8 @@ export default {
     editTime:'',
     editLocation:'',
 
-
     selectedEvent:'',
+
   }
 },
   methods: {
@@ -102,33 +102,39 @@ export default {
 
     async searchID(){
       let allEvents = await axios.get("http://localhost:3000/event");
+      this.events = allEvents.data
+      this.errorView = "Invalid Search" 
 
       var arrayLength = allEvents.data.length;
       for (var i = 0; i < arrayLength; i++) {
-        if(allEvents.data[i].name == this.id_name || allEvents.data[i].id == this.id_name){
+        if (allEvents.data[i].id == this.id_name){
           this.events = allEvents.data.slice(i, i + 1)
-          this.errorView = "" 
+          this.errorView = ""
           return
         }
+        else if(allEvents.data[i].name != this.id_name){
+          this.events.splice(i, 1)
+          i = i - 1
+        }
         else{
-          this.errorView = "Invalid Search" 
-          this.events = allEvents.data.slice(0, 0)
+          this.errorView = "" 
         }
       }
     },
 
     async searchDate(){
       let allEvents = await axios.get("http://localhost:3000/event");
+      this.events = allEvents.data
+      this.errorView = "Invalid Search" 
 
       var arrayLength = allEvents.data.length;
       for (var i = 0; i < arrayLength; i++) {
-        if(allEvents.data[i].date == this.date){
-          this.events = allEvents.data.slice(i, i + 1)
-          this.errorView = "" 
+        if(allEvents.data[i].date != this.date){
+          this.events.splice(i, 1)
+          i = i - 1 
         }
         else{
-          this.errorView = "Invalid Search" 
-          this.events = allEvents.data.slice(0, 0)
+          this.errorView = "" 
         }
       }
     },
@@ -139,6 +145,10 @@ export default {
     },
 
     async saveEvent(eventId){
+      if (eventId == ""){
+        this.errorView = "Invalid Search" 
+        return
+      }
       this.errorView =""
       this.edit = !this.edit
 
