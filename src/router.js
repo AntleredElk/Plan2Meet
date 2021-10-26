@@ -2,7 +2,9 @@ import Home from './components/Home.vue';
 import Login from './components/Login.vue';
 import SignUp from './components/SignUp.vue';
 import CreateEvent from './components/CreateEvent.vue';
+import ViewCalendar from './components/ViewCalendar.vue';
 import DeleteEvent from './components/DeleteEvent.vue';
+import ViewEvents from './components/ViewEvents.vue';
 import AddNewUser from './components/AddNewUser.vue';
 import {createRouter, createWebHistory} from "vue-router";
 
@@ -10,12 +12,12 @@ const routes = [
     {
         name: 'Home',
         component: Home,
-        path:'/'
+        path:'/home'
     },
     {
         name: 'Login',
         component: Login,
-        path:'/login'
+        path:'/'
     },
     {
         name: 'SignUp',
@@ -26,7 +28,7 @@ const routes = [
     {
         name:'AddNewUser',
         component: AddNewUser, 
-        path:'/AddNewUser'
+        path:'/add-new-user'
     },
     {
         name: 'CreateEvent',
@@ -34,13 +36,24 @@ const routes = [
         path:'/create-event'
 
     },
-
     {
-        name: 'DeleteEvent',
+        name:'DeleteEvent',
         component: DeleteEvent,
         path:'/delete-event'
 
-    }
+    },
+    {
+        name: 'ViewEvents',
+        component: ViewEvents,
+        path:'/view-events'
+
+    },
+    {
+        name: 'ViewCalendar',
+        component: ViewCalendar,
+        path:'/ViewCalendar'
+    },
+
 ];
 
 const router = createRouter({

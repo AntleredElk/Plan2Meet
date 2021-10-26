@@ -12,7 +12,7 @@
         <router-link to="/delete-event"> Would you like to delete an Event? </router-link>
     </p>
     <p>
-        <router-link to="/AddNewUser"> Would you like to add a new user to an Event? </router-link>
+        <router-link to="/add-new-user"> Would you like to add a new user to an Event? </router-link>
     </p>
 
 </div>
@@ -48,7 +48,7 @@ export default {
             if(result.status==201)
             {              
                 localStorage.setItem("event-info",JSON.stringify(result.data))
-                this.$router.push({name:'CreateEvent'})
+                this.$router.push({name:'create-event'})
                 //alert("sign up successful")
             }
         }

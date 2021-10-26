@@ -1,5 +1,8 @@
 <template>
   <router-view/>
+  <p>
+  <router-link to="/home"> Back Home </router-link>
+  </p>
 </template>
 
 <script>
