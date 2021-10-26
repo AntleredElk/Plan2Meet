@@ -24,23 +24,13 @@
           </tr>
         </thead>
         <tbody>
-            <tr v-for="event in events" :key="event.id">
-            <td>{{event.id}}</td>
-
-            <td v-if=edit && eventToEdit = event.id width="20%"><input type="text" v-model="editName" id='nameId' placeholder="New Name" ></td>
-            <td v-else> {{event.name}}</td> 
-
-            <td v-if=!edit>{{event.date}}</td> 
-            <td v-else width="20%"><input type="date" v-model="editDate" placeholder="New Date"></td>
-
-            <td v-if=!edit>{{event.time}}</td> 
-            <td v-else width="20%"><input type="time" v-model="editTime" placeholder="New Time"></td>
-
-            <td v-if=edit && eventToEdit = event.id width="20%"><input type="text" v-model="editLocation" placeholder="New Location"></td>
-            <td v-else>{{event.location}}</td> 
+            <tr v-for="event in events" :key="event.id" >
             
-
-            <td v-if=!edit><button v-on:click="editEvent(event)"> Edit Events </button></td> <td v-else> <button style="color: red" v-on:click="saveEvent(event)">Save Events</button> <button style="color: red" onclick="document.getElementById('nameId').value='Aurelia'; edit=!edit"> Cancel Edit </button></td>
+            <td>{{event.id}}</td>
+            <td>{{event.name}}</td>
+            <td>{{event.date}}</td> 
+            <td>{{event.time}}</td> 
+            <td>{{event.location}}</td> 
 
             </tr>
         </tbody>
@@ -51,11 +41,29 @@
       <span v-if="errorView" style="color: red"
         >Error: {{ errorView}}
       </span>
-      <br />
-      <button v-on:click="refresh"> Refresh </button>
       <br/>
-      <button v-if="!edit" v-on:click="editEvent"> Edit Events </button>
-      <button v-else style="color: red" onclick="document.getElementById('nameId').value='Aurelia'; edit=!edit"> Cancel Edit </button>
+      <button v-if="!edit" v-on:click="refresh"> Refresh </button>
+      <br/>
+      <button v-if="!edit" v-on:click="editEvent(event)"> Edit Events </button>
+
+      <div1 v-if="edit">
+        <span >Edit Event with ID: </span>
+        <select v-model="selectedEvent">
+          <option v-for="event in events" v-bind:key="event.id">{{ event.id }} </option>
+        </select>
+        <br/>
+        Enter New Name: <input v-if="edit" type="text" v-model="editName" placeholder="Name" />
+        <br/>
+        Enter New Date: <input v-if="edit" type="date" v-model="editDate" placeholder="Date" />
+        <br/>
+        Enter New Time: <input v-if="edit" type="time" v-model="editTime" placeholder="Time" />
+        <br/>
+        Enter New Location: <input v-if="edit" type="text" v-model="editLocation" placeholder="Location" />
+        <br/>
+        <button v-if="edit" style="color: red" v-on:click="editEvent()"> Cancel Edit </button>
+        <br/> 
+        <button v-if="edit" style="color: red" v-on:click="saveEvent(selectedEvent)"> Save Edit </button>
+      </div1>
     </p>
   </div>
 </template>
@@ -69,17 +77,20 @@ export default {
   data() {
   return {
     events: [],
+    temp_event: [],
+
     id_name:'',
     date:'',
     errorView:'',
 
     edit: false,
-    eventToEdit:'',
     editName:'',
     editDate:'',
     editTime:'',
     editLocation:'',
-    placeholderName:'',
+
+
+    selectedEvent:'',
   }
 },
   methods: {
@@ -114,7 +125,6 @@ export default {
         if(allEvents.data[i].date == this.date){
           this.events = allEvents.data.slice(i, i + 1)
           this.errorView = "" 
-          return
         }
         else{
           this.errorView = "Invalid Search" 
@@ -123,38 +133,56 @@ export default {
       }
     },
 
-    async editEvent(event){
+    async editEvent(){
+      this.errorView =""
       this.edit = !this.edit
-      this.eventToEdit = event.id
-      document.getElementById('nameId').value = " Aurelia"
     },
 
-    async saveEvent(event){
+    async saveEvent(eventId){
+      this.errorView =""
       this.edit = !this.edit
-      this.eventToEdit = ''
+
       let allEvents = await axios.get("http://localhost:3000/event");
       var arrayLength = allEvents.data.length;
+
       for (var i = 0; i < arrayLength; i++) {
-        if (event.id == allEvents.data[i].id){
+        if (eventId == allEvents.data[i].id){
+
           if(this.editName.length != 0){
-            event.name = this.editName
+            this.temp_event.name = this.editName
           }
-          if(this.editDate.length != 0){
-            event.date = this.editDate
-          }
-          if(this.editTime.length != 0){
-            event.time = this.editTime
-          }
-          if(this.editLocation.length != 0){
-            event.location = this.editLocation
+          else{
+            this.temp_event.name = this.events[i].name
           }
 
-          let result = await axios.put("http://localhost:3000/event/"+event.id,
+          if(this.editDate.length != 0){
+            this.temp_event.date = this.editDate
+          }
+          else{
+            this.temp_event.date= this.events[i].date
+          }
+  
+          if(this.editTime.length != 0){
+            this.temp_event.time = this.editTime
+          }
+          else{
+            this.temp_event.time = this.events[i].time
+          }
+
+          if(this.editLocation.length != 0){
+            this.temp_event.location = this.editLocation
+          }
+          else{
+            this.temp_event.location = this.events[i].location
+          }
+
+
+          let result = await axios.put("http://localhost:3000/event/" + eventId,
           {
-            name: event.name, 
-            date: event.date,
-            time: event.time,
-            location: event.location
+            name: this.temp_event.name, 
+            date: this.temp_event.date,
+            time: this.temp_event.time,
+            location: this.temp_event.location
           });
             
           console.warn(result);
@@ -162,9 +190,18 @@ export default {
           {              
             localStorage.setItem("event-info",JSON.stringify(result.data))
           }
+
+          this.errorView =""
+          let allEvents = await axios.get("http://localhost:3000/event");
+          this.events = allEvents.data;
           return
         }
       }
+    },
+
+    addNewfield() {
+      const clone = Object.assign({}, this.item);
+      this.items.push(clone);
     },
 
 

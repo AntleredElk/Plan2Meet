@@ -9,22 +9,22 @@
   ],
   "event": [
     {
-      "name": "sd",
-      "date": "2021-10-30",
-      "time": "01:24",
-      "location": "Home",
+      "name": "event 1",
+      "date": "2021-10-28",
+      "time": "16:37",
+      "location": "McGill",
       "id": 1
     },
     {
-      "name": "event12",
-      "date": "2021-10-25",
-      "time": "22:29",
-      "location": "McGill",
+      "name": "xy",
+      "date": "2021-10-28",
+      "time": "16:37",
+      "location": "k",
       "id": 2
     },
     {
       "name": "event3",
-      "date": "2021-10-24",
+      "date": "2021-10-05",
       "time": "10:38",
       "location": "mcgill",
       "id": 3
