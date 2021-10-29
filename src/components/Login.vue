@@ -31,7 +31,7 @@ export default {
         if(result.status==200 && result.data.length>0)
             {              
                 localStorage.setItem("user-info",JSON.stringify(result.data))
-                this.$router.push({name:'Home'})
+                this.$router.push({name:'ViewProfile'})
             }
         else{
             alert("Incorrect email or password");

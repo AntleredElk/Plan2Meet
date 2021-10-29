@@ -6,6 +6,8 @@ import ViewCalendar from './components/ViewCalendar.vue';
 import DeleteEvent from './components/DeleteEvent.vue';
 import ViewEvents from './components/ViewEvents.vue';
 import AddNewUser from './components/AddNewUser.vue';
+import CreateProfile from './components/CreateProfile.vue';
+import ViewProfile from './components/ViewProfile.vue';
 import {createRouter, createWebHistory} from "vue-router";
 
 const routes = [
@@ -17,7 +19,7 @@ const routes = [
     {
         name: 'Login',
         component: Login,
-        path:'/'
+        path:'/login'
     },
     {
         name: 'SignUp',
@@ -52,6 +54,16 @@ const routes = [
         name: 'ViewCalendar',
         component: ViewCalendar,
         path:'/ViewCalendar'
+    },
+    {
+        name: 'CreateProfile',
+        component: CreateProfile,
+        path:'/create-profile'
+    },
+    {
+        name: 'ViewProfile',
+        component: ViewProfile,
+        path:'/view-profile'
     },
 
 ];

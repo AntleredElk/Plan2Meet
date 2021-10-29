@@ -1,4 +1,32 @@
 {
-  "user": [],
-  "event": []
+  "user": [
+    {
+      "name": "test",
+      "email": "test",
+      "password": "test",
+      "firstName": "Edward ",
+      "lastName": "Kang",
+      "phoneNumber": "51444685798",
+      "userEmail": "test",
+      "userLocation": "Chicago, IL",
+      "userStatus": "I am alive. ",
+      "id": 1
+    }
+  ],
+  "event": [
+    {
+      "name": "test",
+      "date": "2021-10-21",
+      "time": "11:11",
+      "location": "test",
+      "id": 1
+    },
+    {
+      "name": "test",
+      "date": "2021-10-21",
+      "time": "11:11",
+      "location": "test",
+      "id": 2
+    }
+  ]
 }
