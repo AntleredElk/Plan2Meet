@@ -15,6 +15,9 @@
     <p>
     <a v-on:click="logout" href="#">Logout</a> 
     </p>
+    <p>
+    <a v-on:click="deleteUser" href="#">Delete This User</a> 
+    </p>
 </template>
 <script>
 export default {
@@ -40,6 +43,10 @@ export default {
         addNewUser()
         {
             this.$router.push({name:'AddNewUser'})
+        },
+        deleteUser()
+        {
+            this.$router.push({name:'DeleteUser'})
         }
         
     },

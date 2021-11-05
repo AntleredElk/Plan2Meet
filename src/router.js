@@ -6,6 +6,7 @@ import ViewCalendar from './components/ViewCalendar.vue';
 import DeleteEvent from './components/DeleteEvent.vue';
 import ViewEvents from './components/ViewEvents.vue';
 import AddNewUser from './components/AddNewUser.vue';
+import DeleteUser from './components/DeleteUser.vue';
 import {createRouter, createWebHistory} from "vue-router";
 
 const routes = [
@@ -53,6 +54,11 @@ const routes = [
         component: ViewCalendar,
         path:'/ViewCalendar'
     },
+    {
+        name: 'DeleteUser',
+        component: DeleteUser,
+        path: '/DeleteUser'
+    }
 
 ];
 
