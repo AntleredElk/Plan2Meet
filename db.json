@@ -1,5 +1,29 @@
 {
   "user": [
+    {
+      "name": "a",
+      "email": "a",
+      "password": "a",
+      "firstName": "a",
+      "lastName": "a",
+      "phoneNumber": "a",
+      "userEmail": "a",
+      "userLocation": "a",
+      "userStatus": "a",
+      "id": 1
+    },
+    {
+      "name": "a",
+      "email": "a@mail",
+      "password": "1",
+      "firstName": "2",
+      "lastName": "2",
+      "phoneNumber": "2",
+      "userEmail": "a@mail",
+      "userLocation": "2",
+      "userStatus": "2",
+      "id": 2
+    }
   ],
   "event": []
 }

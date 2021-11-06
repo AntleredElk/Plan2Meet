@@ -2,13 +2,14 @@
 <img class = "logo" src="../assets/plan2meetLogo.svg" />
 <h1>Create/Update Profile</h1>
 <div class ="CreateProfile">
+    <h3 style="color:red;">Caution: you must provide an existing email! </h3>
+    <input type="text" v-model="userEmail" placeholder="Existing Email" /><br><br>
     <!-- Name -->
     <input type="text" v-model="firstName" placeholder="Enter First Name" /><br><br>
     <input type="text" v-model="lastName" placeholder="Enter Last Name" /><br><br>
 
     <!-- Contact -->
     <input type="text" v-model="phoneNumber" placeholder="Enter Phone Number" /><br><br>
-    <input type="text" v-model="userEmail" placeholder=userEmail /><br><br>
     <!-- Location -->
     <input type="text" v-model="userLocation" placeholder="Enter Location" /><br><br>
     <!-- Status --> 
