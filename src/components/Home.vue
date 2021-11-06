@@ -1,6 +1,9 @@
 <template>
     <h1>Welcome to Home Page</h1>
     <p>
+    <a v-on:click="viewProfile" href="#">User Profile</a> 
+    </p>
+    <p>
     <a v-on:click="createEvent" href="#">Create Event</a> 
     </p>
     <p>
@@ -40,6 +43,10 @@ export default {
         addNewUser()
         {
             this.$router.push({name:'AddNewUser'})
+        },
+        viewProfile()
+        {
+            this.$router.push({name:'ViewProfile'})
         }
         
     },

@@ -25,5 +25,20 @@
       "id": 2
     }
   ],
-  "event": []
+  "event": [
+    {
+      "name": "work",
+      "date": "2021-11-06",
+      "time": "15:56",
+      "location": "NY",
+      "id": 1
+    },
+    {
+      "name": "party",
+      "date": "2021-11-06",
+      "time": "15:56",
+      "location": "mtl",
+      "id": 2
+    }
+  ]
 }

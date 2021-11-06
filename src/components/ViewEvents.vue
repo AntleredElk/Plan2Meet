@@ -58,7 +58,7 @@
         <br/>
         Enter New Time: <input v-if="edit" type="time" v-model="editTime" placeholder="Time" />
         <br/>
-        Enter New Location: <input v-if="edit" type="text" v-model="editLocation" placeholder="Location" />
+        Enter New Location: <input v-if="edit" v-model="editLocation" placeholder="Location" />
         <br/>
         <button v-if="edit" style="color: red" v-on:click="editEvent()"> Cancel Edit </button>
         <br/> 
