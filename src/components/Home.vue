@@ -18,6 +18,9 @@
     <p>
     <a v-on:click="logout" href="#">Logout</a> 
     </p>
+    <p>
+    <a v-on:click="deleteUser" href="#">Delete This User</a> 
+    </p>
 </template>
 <script>
 export default {
@@ -47,6 +50,10 @@ export default {
         viewProfile()
         {
             this.$router.push({name:'ViewProfile'})
+        },
+        deleteUser()
+        {
+            this.$router.push({name:'DeleteUser'})
         }
         
     },

@@ -2,18 +2,6 @@
   "user": [
     {
       "name": "a",
-      "email": "a",
-      "password": "a",
-      "firstName": "a",
-      "lastName": "a",
-      "phoneNumber": "a",
-      "userEmail": "a",
-      "userLocation": "a",
-      "userStatus": "a",
-      "id": 1
-    },
-    {
-      "name": "a",
       "email": "a@mail",
       "password": "1",
       "firstName": "2",

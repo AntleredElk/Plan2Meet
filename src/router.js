@@ -8,6 +8,7 @@ import ViewEvents from './components/ViewEvents.vue';
 import AddNewUser from './components/AddNewUser.vue';
 import CreateProfile from './components/CreateProfile.vue';
 import ViewProfile from './components/ViewProfile.vue';
+import DeleteUser from './components/DeleteUser.vue';
 import {createRouter, createWebHistory} from "vue-router";
 
 const routes = [
@@ -65,6 +66,11 @@ const routes = [
         component: ViewProfile,
         path:'/view-profile'
     },
+    {
+        name: 'DeleteUser',
+        component: DeleteUser,
+        path: '/DeleteUser'
+    }
 
 ];
 
