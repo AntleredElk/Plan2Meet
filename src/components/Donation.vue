@@ -89,7 +89,7 @@ export default {
             }
             if(this.cardNumber){
                 var totalDigit = document.getElementById('ccnum').value.length;
-                if(totalDigit!==16){
+                if(totalDigit<12){
                     alert("Invalid Credit Card number");
                     this.error.push("Invalid Credit Card number");
                 }
@@ -105,6 +105,12 @@ export default {
                 else if(this.expiryYear==year && this.expiryMonth<month){
                     alert("Card expired. Please enter a valid card");
                     this.error.push("Card expired");
+                }
+            }
+            if(this.expiryMonth){
+                if(this.expiryMonth<1 || this.expiryMonth>12){
+                    alert("Please select month from 1-12");
+                    this.error.push("invalid month");
                 }
             }
             if(this.cvv){
