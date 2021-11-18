@@ -26,5 +26,12 @@ npm install -g jason server
 ```
 json-server --watch db.json
 ```
+or 
+```
+json-server db.json
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+

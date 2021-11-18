@@ -1,6 +1,9 @@
 <template>
     <h1>Welcome to Home Page</h1>
     <p>
+    <a v-on:click="viewProfile" href="#">User Profile</a> 
+    </p>
+    <p>
     <a v-on:click="createEvent" href="#">Create Event</a> 
     </p>
     <p>
@@ -11,6 +14,12 @@
     </p>
     <p>
     <a v-on:click="addNewUser" href="#">Add New User to an Event</a> 
+    </p>
+    <p>
+    <a v-on:click="donate" href="#">Make a donation</a> 
+    </p>
+    <p>
+    <a v-on:click="deleteUser" href="#">Delete This User</a> 
     </p>
     <p>
     <a v-on:click="logout" href="#">Logout</a> 
@@ -40,6 +49,18 @@ export default {
         addNewUser()
         {
             this.$router.push({name:'AddNewUser'})
+        },
+        viewProfile()
+        {
+            this.$router.push({name:'ViewProfile'})
+        },
+        deleteUser()
+        {
+            this.$router.push({name:'DeleteUser'})
+        },
+        donate()
+        {
+            this.$router.push({name:'Donation'})
         }
         
     },

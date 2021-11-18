@@ -33,6 +33,7 @@ export default {
   },
   methods: {
       async editprofile(){
+<<<<<<< HEAD
 
         this.$router.push({name:'CreateProfile'})
 
@@ -41,6 +42,12 @@ export default {
       async viewprofile(){
         let allUsers = await axios.get("http://localhost:3000/user");
 
+=======
+        this.$router.push({name:'CreateProfile'})
+      },
+      async viewprofile(){
+        let allUsers = await axios.get("http://localhost:3000/user");
+>>>>>>> main
         var arrayLength = allUsers.data.length;
         for (var i = 0; i < arrayLength; i++) {
         if(allUsers.data[i].email == this.userEmail){
@@ -53,8 +60,11 @@ export default {
                 this.events = allUsers.data.slice(0, 0)
             }
         }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> main
       }
   }
 };

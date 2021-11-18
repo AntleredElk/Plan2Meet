@@ -5,7 +5,7 @@
     <input type="text" v-model="name" placeholder="Enter Name of Event" />
     <input type="date" v-model="date" placeholder="Enter Event Date" />
     <input type="time" v-model="time" placeholder="Enter Event Time" />
-    <input type="text" v-model="location" placeholder="Enter Event Location" />
+    <input type="text" v-model="location" placeholder="Enter Event Location" ref="autocomplete" />
 
     <button v-on:click="createEvent"> Create Event </button>
     <p>
@@ -30,6 +30,20 @@ export default {
             time:'',
             location:''
         }
+    },
+    mounted(){
+        const autocomplete = new window.google.maps.places.Autocomplete(
+        this.$refs["autocomplete"],
+        {
+        bounds: new window.google.maps.LatLngBounds(
+          new window.google.maps.LatLng(45.508888, -73.561668)
+        ),
+      }
+    );
+        autocomplete.addListener("place_changed", () => {
+        //var place = autocomplete.getPlace();
+        console.log(autocomplete.getPlace());
+        })
     },
     methods:{
         async createEvent()

@@ -1,6 +1,7 @@
 {
   "user": [
     {
+<<<<<<< HEAD
       "name": "test",
       "email": "test",
       "password": "test",
@@ -11,10 +12,23 @@
       "userLocation": "Chicago, IL",
       "userStatus": "I am alive. ",
       "id": 1
+=======
+      "name": "a",
+      "email": "a@mail",
+      "password": "1",
+      "firstName": "2",
+      "lastName": "2",
+      "phoneNumber": "2",
+      "userEmail": "a@mail",
+      "userLocation": "2",
+      "userStatus": "2",
+      "id": 2
+>>>>>>> main
     }
   ],
   "event": [
     {
+<<<<<<< HEAD
       "name": "test",
       "date": "2021-10-21",
       "time": "11:11",
@@ -26,6 +40,19 @@
       "date": "2021-10-21",
       "time": "11:11",
       "location": "test",
+=======
+      "name": "work",
+      "date": "2021-11-06",
+      "time": "15:56",
+      "location": "NY",
+      "id": 1
+    },
+    {
+      "name": "party",
+      "date": "2021-11-06",
+      "time": "15:56",
+      "location": "mtl",
+>>>>>>> main
       "id": 2
     }
   ]

@@ -20,17 +20,19 @@
             <th width="20%">Date</th>
             <th width="20%">Time</th>
             <th width="20%">Location</th>
+
           </tr>
         </thead>
         <tbody>
-            <tr v-for="event in events" :key="event.id">
+            <tr v-for="event in events" :key="event.id" >
+            
             <td>{{event.id}}</td>
             <td>{{event.name}}</td>
-            <td>{{event.date}}</td>
-            <td>{{event.time}}</td>
-            <td>{{event.location}}</td>
-            </tr>
+            <td>{{event.date}}</td> 
+            <td>{{event.time}}</td> 
+            <td>{{event.location}}</td> 
 
+            </tr>
         </tbody>
       </table>
 </center>
@@ -39,8 +41,29 @@
       <span v-if="errorView" style="color: red"
         >Error: {{ errorView}}
       </span>
-      <br />
-      <button v-on:click="refresh"> Refresh </button>
+      <br/>
+      <button v-if="!edit" v-on:click="refresh"> Refresh </button>
+      <br/>
+      <button v-if="!edit" v-on:click="editEvent(event)"> Edit Events </button>
+
+      <div1 v-if="edit">
+        <span >Edit Event with ID: </span>
+        <select v-model="selectedEvent">
+          <option v-for="event in events" v-bind:key="event.id">{{ event.id }} </option>
+        </select>
+        <br/>
+        Enter New Name: <input v-if="edit" type="text" v-model="editName" ng-attr-placeholder="Name" />
+        <br/>
+        Enter New Date: <input v-if="edit" type="date" v-model="editDate" placeholder="Date" />
+        <br/>
+        Enter New Time: <input v-if="edit" type="time" v-model="editTime" placeholder="Time" />
+        <br/>
+        Enter New Location: <input v-if="edit" v-model="editLocation" placeholder="Location" />
+        <br/>
+        <button v-if="edit" style="color: red" v-on:click="editEvent()"> Cancel Edit </button>
+        <br/> 
+        <button v-if="edit" style="color: red" v-on:click="saveEvent(selectedEvent)"> Save Edit </button>
+      </div1>
     </p>
   </div>
 </template>
@@ -54,51 +77,143 @@ export default {
   data() {
   return {
     events: [],
+    temp_event: [],
+
     id_name:'',
     date:'',
-    errorView:''
+    errorView:'',
+
+    edit: false,
+    editName:'',
+    editDate:'',
+    editTime:'',
+    editLocation:'',
+
+    selectedEvent:'',
+
   }
 },
   methods: {
     async refresh(){
+      this.errorView =""
       let allEvents = await axios.get("http://localhost:3000/event");
       this.events = allEvents.data;
     },
 
     async searchID(){
       let allEvents = await axios.get("http://localhost:3000/event");
+      this.events = allEvents.data
+      this.errorView = "Invalid Search" 
 
       var arrayLength = allEvents.data.length;
       for (var i = 0; i < arrayLength; i++) {
-        if(allEvents.data[i].name == this.id_name || allEvents.data[i].id == this.id_name){
-          console.log("oui")
+        if (allEvents.data[i].id == this.id_name){
           this.events = allEvents.data.slice(i, i + 1)
-          this.errorView = "" 
+          this.errorView = ""
           return
         }
+        else if(allEvents.data[i].name != this.id_name){
+          this.events.splice(i, 1)
+          i = i - 1
+        }
         else{
-          this.errorView = "Invalid Search" 
-          this.events = allEvents.data.slice(0, 0)
+          this.errorView = "" 
         }
       }
     },
 
     async searchDate(){
       let allEvents = await axios.get("http://localhost:3000/event");
+      this.events = allEvents.data
+      this.errorView = "Invalid Search" 
 
       var arrayLength = allEvents.data.length;
       for (var i = 0; i < arrayLength; i++) {
-        if(allEvents.data[i].date == this.date){
-          this.events = allEvents.data.slice(i, i + 1)
-          this.errorView = "" 
-          return
+        if(allEvents.data[i].date != this.date){
+          this.events.splice(i, 1)
+          i = i - 1 
         }
         else{
-          this.errorView = "Invalid Search" 
-          this.events = allEvents.data.slice(0, 0)
+          this.errorView = "" 
         }
       }
-    }
+    },
+
+    async editEvent(){
+      this.errorView =""
+      this.edit = !this.edit
+    },
+
+    async saveEvent(eventId){
+      if (eventId == ""){
+        this.errorView = "Invalid Search" 
+        return
+      }
+      this.errorView =""
+      this.edit = !this.edit
+
+      let allEvents = await axios.get("http://localhost:3000/event");
+      var arrayLength = allEvents.data.length;
+
+      for (var i = 0; i < arrayLength; i++) {
+        if (eventId == allEvents.data[i].id){
+
+          if(this.editName.length != 0){
+            this.temp_event.name = this.editName
+          }
+          else{
+            this.temp_event.name = this.events[i].name
+          }
+
+          if(this.editDate.length != 0){
+            this.temp_event.date = this.editDate
+          }
+          else{
+            this.temp_event.date= this.events[i].date
+          }
+  
+          if(this.editTime.length != 0){
+            this.temp_event.time = this.editTime
+          }
+          else{
+            this.temp_event.time = this.events[i].time
+          }
+
+          if(this.editLocation.length != 0){
+            this.temp_event.location = this.editLocation
+          }
+          else{
+            this.temp_event.location = this.events[i].location
+          }
+
+
+          let result = await axios.put("http://localhost:3000/event/" + eventId,
+          {
+            name: this.temp_event.name, 
+            date: this.temp_event.date,
+            time: this.temp_event.time,
+            location: this.temp_event.location
+          });
+            
+          console.warn(result);
+          if(result.status==201)
+          {              
+            localStorage.setItem("event-info",JSON.stringify(result.data))
+          }
+
+          this.errorView =""
+          let allEvents = await axios.get("http://localhost:3000/event");
+          this.events = allEvents.data;
+          return
+        }
+      }
+    },
+
+    addNewfield() {
+      const clone = Object.assign({}, this.item);
+      this.items.push(clone);
+    },
+
 
   }
 };
