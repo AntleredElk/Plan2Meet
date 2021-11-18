@@ -9,9 +9,15 @@ import AddNewUser from './components/AddNewUser.vue';
 import CreateProfile from './components/CreateProfile.vue';
 import ViewProfile from './components/ViewProfile.vue';
 import DeleteUser from './components/DeleteUser.vue';
+import SendEmail from './components/SendEmail.vue';
 import {createRouter, createWebHistory} from "vue-router";
 
 const routes = [
+    {
+        name: 'SendEmail',
+        component: SendEmail,
+        path:'/sendEmail'
+    },
     {
         name: 'Home',
         component: Home,

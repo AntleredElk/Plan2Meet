@@ -11,6 +11,19 @@
       "userLocation": "2",
       "userStatus": "2",
       "id": 2
+    },
+    {
+      "name": "aurelia",
+      "email": "aureliahaas@outlook.fr",
+      "password": "aurel",
+      "id": 4
+    },
+    {
+      "name": "aurel",
+      "email": "aureliahaas@outlook.fr",
+      "password": "1",
+      "event": "work",
+      "id": 5
     }
   ],
   "event": [
