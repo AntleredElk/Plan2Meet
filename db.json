@@ -1,28 +1,17 @@
 {
   "user": [
     {
-      "name": "a",
-      "email": "a@mail",
-      "password": "1",
-      "firstName": "2",
-      "lastName": "2",
-      "phoneNumber": "2",
-      "userEmail": "a@mail",
-      "userLocation": "2",
-      "userStatus": "2",
-      "id": 2
-    },
-    {
-      "name": "aurelia",
+      "name": "Aurel",
       "email": "aureliahaas@outlook.fr",
       "password": "aurel",
+      "event": "work",
       "id": 4
     },
     {
-      "name": "aurel",
-      "email": "aureliahaas@outlook.fr",
-      "password": "1",
-      "event": "work",
+      "name": "Aurelia",
+      "email": "aurelia.haas@mail.mcgill.ca",
+      "password": "aurel",
+      "event": "party",
       "id": 5
     }
   ],

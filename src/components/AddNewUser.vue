@@ -1,25 +1,31 @@
 <template>
   <img class="logo" src="../assets/plan2meetLogo.svg" />
   <h1>AddNewUser</h1>
-  <label>Adding a User to an event will send them an email. </label> 
-  <br/>
+  <label style="color: grey"
+    >You can also send an email to this user with the event information.
+  </label>
+  <br />
+  <br />
 
   <div class="AddNewUser">
-    <form ref="form" @submit.prevent="sendEmail">
-      <input type="email" name="user_email" v-model="userEmail" placeholder="User Email" />
-      <input type="text" v-model="eventName" placeholder="Event name"/>
-      <button v-on:click="AddNewUser">addUser</button>
-      <br />
-      <label>Message: </label><text type="text" name="message">{{message}}</text>
-      <!-- <label>Name</label>
-      <input type="text" name="user_name" />
-      <label >Email</label>
-      <input type="email" name="user_email" />
-      <label>Message</label>
-      <textarea name="message"></textarea> -->
-      <br/>
-      <input type="submit" value="Send" />
-    </form>
+    User Email:
+    <input type="email" v-model="userEmail" required placeholder="User Email" />
+    <br />
+    Event Name:
+    <input type="text" v-model="eventName" required placeholder="Event Name" />
+    <br />
+    <br />
+    Send Email From:
+    <input type="text" v-model="hostName" placeholder="Host Name" />
+    <br />
+    Message (Optional): <textarea v-model="message" />
+    <br />
+    <!-- <button v-on:click="AddNewUser">Add User</button>
+    <br /> -->
+    <button style="color: blue" v-on:click="sendEmail">
+      Add User and Send email
+    </button>
+    <br />
   </div>
 </template>
 
@@ -31,60 +37,89 @@ export default {
   name: "AddNewUser",
   data() {
     return {
-      userEmail: "",
-      eventName: "",
-      message: ""
+      userEmail: "", //
+      userName: "",
+
+      eventName: "", //
+      eventDate: "",
+      eventTime: "",
+      eventLocation: "",
+
+      hostName: "", //
+      message: "", //
     };
   },
   methods: {
     async sendEmail() {
-        this.message = "pouetpouet";
-      // get data to send
+      console.log("sending email - start");
+
+      // Setup email parameters
+      // Event
       let allEvents = await axios.get("http://localhost:3000/event");
-      this.events = allEvents.data;
-    //   var arrayLength = allEvents.data.length;
-    //   for (var i = 0; i < arrayLength; i++) {
-    //     if (allEvents.data[i].name == this.eventName) {
-    //         user_name = allEvents.data[i].name
-    //     //   this.events = allEvents.data.slice(i, i + 1);
-    //     //   this.errorView = "";
-    //     //   return;
-    //     // } else if (allEvents.data[i].name != this.id_name) {
-    //     //   this.events.splice(i, 1);
-    //     //   i = i - 1;
-    //     // } else {
-    //     //   this.errorView = "";
-    //     }
-    //   }
+      var arrayEventLength = allEvents.data.length;
+      for (var i = 0; i < arrayEventLength; i++) {
+        if (this.eventName == allEvents.data[i].name) {
+          this.eventDate = allEvents.data[i].date;
+          this.eventTime = allEvents.data[i].time;
+          this.eventLocation = allEvents.data[i].location;
+        }
+      }
+      if (
+        this.eventName.length === 0 ||
+        (this.eventDate.length === 0 &&
+          this.eventTime.length === 0 &&
+          this.eventLocation.length === 0)
+      ) {
+        alert("Incorrect email or user does not exist!");
+        console.log("event error");
+        return;
+      }
+      // User
+      let allUsers = await axios.get("http://localhost:3000/user");
+      var arrayUserLength = allEvents.data.length;
+      for (var j = 0; j < arrayUserLength; j++) {
+        if (this.userEmail == allUsers.data[j].email) {
+          this.userName = allUsers.data[j].name;
+        }
+      }
+      if (this.userEmail.length === 0 || this.userName.length === 0) {
+        alert("Incorrect email or user does not exist!");
+        console.log("user error");
+        return;
+      }
 
-    // var test = {
-    //     'user_email': this.userEmail,
-    //      'message' : " pout"
-    // };
+      // Create the template parameters
+      var templateParams = {
+        user_email: this.userEmail,
+        user_name: this.userName,
+        event_name: this.eventName,
+        event_date: this.eventDate,
+        event_time: this.eventTime,
+        event_location: this.eventLocation,
+        host: this.hostName,
+        message: this.message,
+      };
 
-      // send email
-      emailjs
-        .sendForm(
-          "gmail",
-          "template_hiv1jha",
-          this.$refs.form,
-          "user_FS3MxEFuZQbs3soOK9cmY"
-        )
-        .then(
-          (result) => {
-            console.log("SUCCESS!", result.text);
-          },
-          (error) => {
-            console.log("FAILED...", error.text);
-          }
-        );
+      // Setup email
+      emailjs.init("user_FS3MxEFuZQbs3soOK9cmY");
+      emailjs.send("gmail", "template_hiv1jha", templateParams).then(
+        (result) => {
+          console.log("SUCCESS!", result.text);
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+        }
+      );
+
+      this.AddNewUser();
+      console.log("sending email - end");
     },
+
     async AddNewUser() {
+      console.log("add user here");
       let result = await axios.get(
         `http://localhost:3000/user?email=${this.userEmail}`
       );
-      this.sendEmail();
-      //console.log(result.data[0].name)
 
       if (result.status == 200 && result.data.length > 0) {
         var userName = result.data[0].name;
@@ -119,24 +154,11 @@ export default {
             }
           }
         }
-
-        // if(event.status==200 && event.data.length>0)
-        // {
-
-        // }
       } else {
         alert("Incorrect email or user does not exist!");
       }
       console.warn(result);
     },
   },
-  //,
-  // mounted()
-  // {
-  //     let user = localStorage.getItem('user-info');
-  //     if(user){
-  //         this.$router.push({name:'Home'})
-  //     }
-  // }
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <form ref="form" @submit.prevent="sendEmail">
+  <!-- <form ref="form" @submit.prevent="sendEmail">
       <label>Name</label>
     <input type="text" name="user_name">
     <label>Email</label>
@@ -7,22 +7,30 @@
     <label>Message</label>
     <textarea name="message"></textarea>
     <input type="submit" value="Send">
-  </form>
+  </form> -->
+  <button style="color: red" v-on:click="sendEmail()">Send email</button>
 </template>
 
 <script>
-import emailjs from 'emailjs-com';
+import emailjs from "emailjs-com";
 
 export default {
   methods: {
     sendEmail() {
-      emailjs.sendForm('gmail', 'template_hiv1jha', this.$refs.form, 'user_FS3MxEFuZQbs3soOK9cmY')
-        .then((result) => {
-            console.log('SUCCESS!', result.text);
-        }, (error) => {
-            console.log('FAILED...', error.text);
-        });
-    }
-  }
-}
+      emailjs.init("user_FS3MxEFuZQbs3soOK9cmY")
+      var templateParams = {
+        user_email: 'aureliahaas@outlook.fr',
+        message: 'test message',
+      };
+      emailjs.send("gmail", "template_hiv1jha", templateParams).then(
+        (result) => {
+          console.log("SUCCESS!", result.text);
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+        }
+      );
+    },
+  },
+};
 </script>
