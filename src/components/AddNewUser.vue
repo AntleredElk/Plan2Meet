@@ -1,6 +1,6 @@
 <template>
   <img class="logo" src="../assets/plan2meetLogo.svg" />
-  <h1>AddNewUser</h1>
+  <h1>Add New User</h1>
   <label style="color: grey"
     >You can also send an email to this user with the event information.
   </label>
@@ -20,10 +20,10 @@
     <br />
     Message (Optional): <textarea v-model="message" />
     <br />
-    <!-- <button v-on:click="AddNewUser">Add User</button>
-    <br /> -->
+    <button v-on:click="AddNewUser">Add User</button>
+    <br />
     <button style="color: blue" v-on:click="sendEmail">
-      Add User and Send email
+      Add User and Send Email
     </button>
     <br />
   </div>
