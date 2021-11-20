@@ -16,10 +16,13 @@
     <a v-on:click="addNewUser" href="#">Add New User to an Event</a> 
     </p>
     <p>
-    <a v-on:click="logout" href="#">Logout</a> 
+    <a v-on:click="donate" href="#">Make a donation</a> 
     </p>
     <p>
     <a v-on:click="deleteUser" href="#">Delete This User</a> 
+    </p>
+    <p>
+    <a v-on:click="logout" href="#">Logout</a> 
     </p>
 </template>
 <script>
@@ -54,6 +57,10 @@ export default {
         deleteUser()
         {
             this.$router.push({name:'DeleteUser'})
+        },
+        donate()
+        {
+            this.$router.push({name:'Donation'})
         }
         
     },
