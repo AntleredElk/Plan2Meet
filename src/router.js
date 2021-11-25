@@ -11,6 +11,7 @@ import ViewProfile from './components/ViewProfile.vue';
 import DeleteUser from './components/DeleteUser.vue';
 import SendEmail from './components/SendEmail.vue';
 import Donation from './components/Donation.vue';
+import CalenderUser from './components/CalenderUser'
 import {createRouter, createWebHistory} from "vue-router";
 
 const routes = [
@@ -82,6 +83,11 @@ const routes = [
         name: 'Donation',
         component: Donation,
         path: '/Donate'
+    },
+    {
+        name: 'CalenderUser',
+        component: CalenderUser,
+        path: '/CalenderUser'
     }
 
 ];
