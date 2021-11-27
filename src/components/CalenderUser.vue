@@ -53,7 +53,7 @@ export default{
                 display: 'auto'
             }
             this.currentEvents.push(event)
-            //alert('Clicked on: ' + dateObject.dateStr);
+            alert('Clicked on: ' + dateObject.dateStr);
             console.log(this.currentEvents)
         },
         handleSelect: function(arg){
