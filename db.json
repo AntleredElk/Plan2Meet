@@ -11,7 +11,17 @@
       "name": "Aurelia",
       "email": "aurelia.haas@mail.mcgill.ca",
       "password": "aurel",
-      "event": "party",
+      "userEmail": "aurelia.haas@mail.mcgill.ca",
+      "availability": [
+        {
+          "startDate": "2021-11-26T08:00:00-05:00",
+          "endDate": "2021-11-26T10:00:00-05:00"
+        },
+        {
+          "startDate": "2021-11-27T06:00:00-05:00",
+          "endDate": "2021-11-27T08:00:00-05:00"
+        }
+      ],
       "id": 5
     }
   ],
