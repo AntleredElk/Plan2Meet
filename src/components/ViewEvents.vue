@@ -63,6 +63,15 @@
         <button v-if="edit" style="color: red" v-on:click="editEvent()"> Cancel Edit </button>
         <br/> 
         <button v-if="edit" style="color: red" v-on:click="saveEvent(selectedEvent)"> Save Edit </button>
+
+        <br />
+        <button
+          v-if="edit"
+          style="color: red"
+          v-on:click="downloadICS(selectedEvent)"
+        >
+          Download JSON
+        </button>
       </div1>
     </p>
   </div>
@@ -208,10 +217,42 @@ export default {
         }
       }
     },
+        async downloadICS(eventId) {
+      console.log("Prepare downloading ics...");
+
+      if (eventId == "") {
+        this.errorView = "Invalid Search";
+        return;
+      }
+      this.errorView = "";
+      this.edit = !this.edit;
+
+      let allEvents = await axios.get("http://localhost:3000/event");
+      var arrayLength = allEvents.data.length;
+
+      for (var i = 0; i < arrayLength; i++) {
+        if (eventId == allEvents.data[i].id) {
+          this.temp_event = allEvents.data[i];
+        }
+      }
+
+      var fileName = this.temp_event.name + ".json";
+
+      this.download(JSON.stringify(this.temp_event), fileName, "text/plain")
+
+      return;
+    },
 
     addNewfield() {
       const clone = Object.assign({}, this.item);
       this.items.push(clone);
+    },
+    download(content, fileName, contentType) {
+      const a = document.createElement("a");
+      const file = new Blob([content], { type: contentType });
+      a.href = URL.createObjectURL(file);
+      a.download = fileName;
+      a.click();
     },
 
 
