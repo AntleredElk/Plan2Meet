@@ -1,7 +1,7 @@
 <template>
     <div>
         <input type="user email" v-model="userEmail" placeholder="email of the user" />
-        <button v-on:click="addAvailability"> overwrite Availability </button>
+        <button v-on:click="addAvailability"> Add Availability </button>
         <button v-on:click="removeAvailability"> remove Availability </button>
         <Fullcalendar
         :options="calendarOptions"
@@ -159,11 +159,7 @@ export default{
                             result.data[0].availability.splice(i,1)
                             // delete result.data[0].availability[i]
                             // index.push(i)
-                        }else{
-                            alert("selected time slot does not exist in our database!")
                         }
-                    }else{
-                        alert("selected time slot does not exist in our database!")
                     }
                 }
             }
@@ -205,10 +201,7 @@ export default{
                 }
                 this.currentAvailability = []
             }
-        }else{
-            alert("Please Enter Valid Email address!");
         }
-          console.warn(result)
 
 
       },
