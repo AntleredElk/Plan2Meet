@@ -81,7 +81,7 @@
           style="color: red"
           v-on:click="downloadICS(selectedEvent)"
         >
-          Download ICS
+          Download JSON
         </button>
       </div1>
     </p>
@@ -91,14 +91,6 @@
 <script>
 import axios from "axios";
 
-// const jsonData = {
-//   name: "Jonth",
-//   email: "jobtd@mail.com",
-//   website: "www.4codev.com",
-// };
-
-// const e = document.getElementById("json");
-// e.innerHTML = JSON.stringify(jsonData);
 
 export default {
   name: "ViewEvents",
@@ -252,7 +244,9 @@ export default {
         }
       }
 
-      this.download(JSON.stringify(this.temp_event), "event.json", "text/plain")
+      var fileName = this.temp_event.name + ".json";
+
+      this.download(JSON.stringify(this.temp_event), fileName, "text/plain")
 
       return;
     },
