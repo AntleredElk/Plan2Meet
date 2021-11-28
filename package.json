@@ -14,6 +14,7 @@
     "core-js": "^3.6.5",
     "emailjs-com": "^3.2.0",
     "vue": "^3.0.0",
+    "vue-ics": "^0.1.4",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {

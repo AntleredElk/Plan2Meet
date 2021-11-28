@@ -13,6 +13,12 @@
       "password": "aurel",
       "event": "party",
       "id": 5
+    },
+    {
+      "name": "1",
+      "email": "1",
+      "password": "12345",
+      "id": 6
     }
   ],
   "event": [
