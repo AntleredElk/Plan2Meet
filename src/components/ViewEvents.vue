@@ -15,11 +15,12 @@
       <table class="table table-striped table-bordered">
         <thead>
           <tr>
-            <th width="20%">Event ID</th>
-            <th width="20%">Event Name</th>
-            <th width="20%">Date</th>
-            <th width="20%">Time</th>
-            <th width="20%">Location</th>
+            <th width="16%">Event ID</th>
+            <th width="16%">Event Name</th>
+            <th width="16%">Date</th>
+            <th width="16%">Time</th>
+            <th width="16%">Location</th>
+            <th width="16%">Archive Event</th>
 
           </tr>
         </thead>
@@ -31,7 +32,8 @@
             <td>{{event.date}}</td> 
             <td>{{event.time}}</td> 
             <td>{{event.location}}</td> 
-
+            <td v-if="event.archived"><button v-on:click="unArchiveEvent(event)">Unarchive</button></td>
+            <td v-else><button v-on:click="archiveEvent(event)">Archive</button></td>
             </tr>
         </tbody>
       </table>
@@ -108,6 +110,50 @@ export default {
       this.events = allEvents.data;
     },
 
+    async archiveEvent(event){
+
+      let result = await axios.put("http://localhost:3000/event/" + event.id,
+          {
+            name: event.name, 
+            date: event.date,
+            time: event.time,
+            location: event.location,
+            archived: 1
+          });
+      console.warn(result);
+          if(result.status==201)
+          {              
+            localStorage.setItem("event-info",JSON.stringify(result.data))
+          }
+
+          this.errorView =""
+          let allEvents = await axios.get("http://localhost:3000/event");
+          this.events = allEvents.data;
+          return
+    },
+
+    async unArchiveEvent(event){
+
+      let result = await axios.put("http://localhost:3000/event/" + event.id,
+          {
+            name: event.name, 
+            date: event.date,
+            time: event.time,
+            location: event.location,
+            archived: 0
+          });
+      console.warn(result);
+          if(result.status==201)
+          {              
+            localStorage.setItem("event-info",JSON.stringify(result.data))
+          }
+
+          this.errorView =""
+          let allEvents = await axios.get("http://localhost:3000/event");
+          this.events = allEvents.data;
+          return
+    },
+
     async searchID(){
       let allEvents = await axios.get("http://localhost:3000/event");
       this.events = allEvents.data
@@ -162,57 +208,62 @@ export default {
 
       let allEvents = await axios.get("http://localhost:3000/event");
       var arrayLength = allEvents.data.length;
-
+      console.log(allEvents);
       for (var i = 0; i < arrayLength; i++) {
         if (eventId == allEvents.data[i].id){
+        console.log(allEvents.data[i]);
 
-          if(this.editName.length != 0){
-            this.temp_event.name = this.editName
-          }
-          else{
-            this.temp_event.name = this.events[i].name
-          }
+          if (allEvents.data[i].archived){
+            this.errorView = "Cannot modify archived event.";
+          } else {
+            if(this.editName.length != 0){
+              this.temp_event.name = this.editName
+            }
+            else{
+              this.temp_event.name = this.events[i].name
+            }
 
-          if(this.editDate.length != 0){
-            this.temp_event.date = this.editDate
-          }
-          else{
-            this.temp_event.date= this.events[i].date
-          }
-  
-          if(this.editTime.length != 0){
-            this.temp_event.time = this.editTime
-          }
-          else{
-            this.temp_event.time = this.events[i].time
-          }
+            if(this.editDate.length != 0){
+              this.temp_event.date = this.editDate
+            }
+            else{
+              this.temp_event.date= this.events[i].date
+            }
+    
+            if(this.editTime.length != 0){
+              this.temp_event.time = this.editTime
+            }
+            else{
+              this.temp_event.time = this.events[i].time
+            }
 
-          if(this.editLocation.length != 0){
-            this.temp_event.location = this.editLocation
-          }
-          else{
-            this.temp_event.location = this.events[i].location
-          }
+            if(this.editLocation.length != 0){
+              this.temp_event.location = this.editLocation
+            }
+            else{
+              this.temp_event.location = this.events[i].location
+            }
 
 
-          let result = await axios.put("http://localhost:3000/event/" + eventId,
-          {
-            name: this.temp_event.name, 
-            date: this.temp_event.date,
-            time: this.temp_event.time,
-            location: this.temp_event.location
-          });
-            
-          console.warn(result);
-          if(result.status==201)
-          {              
-            localStorage.setItem("event-info",JSON.stringify(result.data))
-          }
+            let result = await axios.put("http://localhost:3000/event/" + eventId,
+            {
+              name: this.temp_event.name, 
+              date: this.temp_event.date,
+              time: this.temp_event.time,
+              location: this.temp_event.location
+            });
+              
+            console.warn(result);
+            if(result.status==201)
+            {              
+              localStorage.setItem("event-info",JSON.stringify(result.data))
+            }
 
-          this.errorView =""
-          let allEvents = await axios.get("http://localhost:3000/event");
-          this.events = allEvents.data;
-          return
+            this.errorView =""
+            let allEvents = await axios.get("http://localhost:3000/event");
+            this.events = allEvents.data;
+            return
+          }
         }
       }
     },
@@ -242,6 +293,7 @@ export default {
 
       return;
     },
+
     download(content, fileName, contentType) {
       const a = document.createElement("a");
       const file = new Blob([content], { type: contentType });
@@ -254,8 +306,6 @@ export default {
       const clone = Object.assign({}, this.item);
       this.items.push(clone);
     },
-
-
   }
 };
 </script>
