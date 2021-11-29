@@ -3,14 +3,12 @@
         <input type="user email" v-model="userEmail" placeholder="email of the user" />
         <button v-on:click="addAvailability"> Add Availability </button>
         <button v-on:click="removeAvailability"> remove Availability </button>
-        <Fullcalendar
-        :options="calendarOptions"
-        />
+        <Fullcalendar :options="calendarOptions"></Fullcalendar>
     </div>
 </template>
 
 <script>
-import '@fullcalendar/core/vdom';
+import '@fullcalendar/core';
 import Fullcalendar from "@fullcalendar/vue3";
 import DayGridPlugin from "@fullcalendar/daygrid";
 import TimeGridPlugin from "@fullcalendar/timegrid";
@@ -21,7 +19,7 @@ export default{
     components : {Fullcalendar},
 
     data: function() {
-        
+        var self = this;
         return {  
             calendarOptions: {
                 plugins: [DayGridPlugin, TimeGridPlugin, InteractionPlugin],
@@ -31,24 +29,19 @@ export default{
                     right: 'dayGridMonth,timeGridWeek,timeGridDay',
                 },
                 editable: true,
-                events: this.currentEvents,
+                
                 selectable: true,
-                dateClick: this.handleDateClick,
+                //dateClick: this.handleDateClick,
                 initialView: 'dayGridMonth',
-                // eventRender: this.events
+                events: self.currentAvailability,
                 select: this.handleSelect                
             },
             userEmail:'',
             currentAvailability: [],
             selectionInfo: {},
             dataObject:'',
-            currentEvents: [
-                    {
-                    id: 'a',
-                    title: 'my event',
-                    start: '2021-11-11'
-                    }
-            ],        
+            color: 'yellow',   // an option!
+            textColor: 'black' // an option!        
         }
     },
 
@@ -77,13 +70,11 @@ export default{
         handleSelect: function(arg){
             var dateObject = arg
             let availibility = {
-                startDate: dateObject.startStr,
-                endDate: dateObject.endStr,
+                title: '',
+                start: dateObject.startStr,
+                end: dateObject.endStr,
             }
             this.currentAvailability.push(availibility)
-            alert('Clicked on: ' + dateObject.startStr +' to '+dateObject.endStr);
-            // console.log(dateObject)
-            // console.log(dateObject.view.calender)
             console.log(this.currentAvailability)
         },
 
@@ -129,6 +120,7 @@ export default{
                         this.$router.push({name:'CalenderUser'})
                     }
                     this.currentAvailability = []
+                    window.location.reload()
                 }
             }
         else{
