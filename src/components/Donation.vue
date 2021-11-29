@@ -38,7 +38,7 @@
 </template>
 
 <script>
-//import axios from 'axios'
+import axios from 'axios'
 export default {
   name: "Donation",
   data()
@@ -89,7 +89,7 @@ export default {
             }
             if(this.cardNumber){
                 var totalDigit = document.getElementById('ccnum').value.length;
-                if(totalDigit<12){
+                if(totalDigit<12 || totalDigit>16){
                     alert("Invalid Credit Card number");
                     this.error.push("Invalid Credit Card number");
                 }
@@ -121,7 +121,25 @@ export default {
                 }
             }
             if(this.error.length===0){   
-                alert(`Thank you for the $${this.donation} donation`);
+                
+                let result = await axios.post("http://localhost:3000/donation",
+                {
+                    donation: this.donation,
+                    cardholderName: this.cardholderName,
+                    address: this.address,
+                    cardNumber: this.cardNumber,
+                    expiryMonth: this.expiryMonth,
+                    expiryYear: this.expiryYear,
+                    cvv:this.cvv
+                });
+
+                console.warn(result);
+                if(result.status==201)
+                {              
+                    localStorage.setItem("user-info",JSON.stringify(result.data))
+                    alert(`Thank you for the $${this.donation} donation`);
+                }
+                
             }
             
         }
