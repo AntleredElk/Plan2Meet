@@ -26,13 +26,13 @@ export default{
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay',
+                    right: 'timeGridWeek,timeGridDay',
                 },
                 editable: true,
                 
                 selectable: true,
                 //dateClick: this.handleDateClick,
-                initialView: 'dayGridMonth',
+                initialView: 'timeGridWeek',
                 events: self.currentAvailability,
                 select: this.handleSelect                
             },
@@ -74,6 +74,8 @@ export default{
                 start: dateObject.startStr,
                 end: dateObject.endStr,
             }
+            // console.log(dateObject)
+            alert('Time Selected: ' + dateObject.startStr  + ' to ' + dateObject.endStr);
             this.currentAvailability.push(availibility)
             console.log(this.currentAvailability)
         },
@@ -128,7 +130,11 @@ export default{
         }
           console.warn(result)
       },
+
       async removeAvailability(){
+        var notExistTimeSlot = []
+        var notExistTimeSlotString = ""
+        var indicator = true
         let result = await axios.get(
             `http://localhost:3000/user?email=${this.userEmail}`
         )
@@ -137,25 +143,44 @@ export default{
             // var arrayLength = result.data[0].availability.length;
             // var index = []
             // console.log(currentArrayLength)
-            console.log(result)
+            console.log("---------- get user! --------------")
+            console.log(result.data[0])
             // console.log(arrayLength)
 
             for (var j = 0; j< currentArrayLength; j++){
                 var arrayLength = result.data[0].availability.length;
                 for (var i = arrayLength- 1; i >= 0; i--) {
-                    console.log(result.data[0].availability[i])
-                    console.log(result.data[0].availability[i]['startDate'])
-                    if(result.data[0].availability[i]['startDate'] == this.currentAvailability[j]['startDate']){
-                        if(result.data[0].availability[i]['endDate'] == this.currentAvailability[j]['endDate']){
-                            console.log("find it!")
-                            result.data[0].availability.splice(i,1)
-                            // delete result.data[0].availability[i]
-                            // index.push(i)
-                        }
+                    // console.log("result availability: ")
+                    // console.log(result.data[0].availability)
+                    // console.log("current availbility: ")
+                    // console.log(this.currentAvailability)
+                    // console.log("result i startDate")
+                    // console.log(result.data[0].availability[i]['start'])
+                    // console.log("current availability j startDate")
+                    // console.log(this.currentAvailability[j]['start'])
+                    if(result.data[0].availability.length > 0 && result.data[0].availability[i]['start'] == this.currentAvailability[j]['start'] && result.data[0].availability[i]['end'] == this.currentAvailability[j]['end']){
+                        console.log("find it!")
+                        result.data[0].availability.splice(i,1)
+                        indicator = false
+                        // delete result.data[0].availability[i]
+                        // index.push(i)
+                    }
+                } 
+                if (indicator){
+                    console.log('time slot not found!')
+                    console.log(this.currentAvailability[j])
+                    if(notExistTimeSlot.length == 0){
+                        notExistTimeSlot.push(this.currentAvailability[j])
+                    }
+                    else if(!notExistTimeSlot.some(item => item['start'] == this.currentAvailability[j]['start'] && item['end'] == this.currentAvailability[j]['end'])){
+                        notExistTimeSlot.push(this.currentAvailability[j])
                     }
                 }
+                indicator = true
             }
-            console.log(result.data[0].availability)
+            notExistTimeSlot
+            // console.log('---------- after remove --------------')
+            // console.log(result.data[0].availability)
             var userName = result.data[0].name
             var userEmail = result.data[0].email 
             var userPassword =  result.data[0].password
@@ -192,8 +217,21 @@ export default{
                     this.$router.push({name:'CalenderUser'})
                 }
                 this.currentAvailability = []
+                var nonExistingTimeSlotLength = notExistTimeSlot.length;
+                for(var m=0; m<nonExistingTimeSlotLength; m++){
+                    notExistTimeSlotString = notExistTimeSlotString + m + ': '+ notExistTimeSlot[m]['start'] + " to " + notExistTimeSlot[m]['end'] + ";"
+                }
+                if(notExistTimeSlotString.length > 0){
+                    alert("The time slot you selected: " + notExistTimeSlotString + " does not exist! Please refresh the page and select the exisitng time slots!")
+                }
+                window.location.reload()
             }
         }
+        else{
+            alert("Please Enter Valid Email address!");
+        }
+        console.warn(result)
+
 
 
       },

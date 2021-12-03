@@ -18,6 +18,9 @@
     <!-- Edit Profile Button-->
     <button v-on:click="viewprofile"> View Profile </button><br>
     <button v-on:click="editprofile"> Edit Profile </button>
+    <p>
+    <a v-on:click="addUserAvailability" href="#">add user availability</a> 
+    </p>
 </div>
 </template>
 
@@ -32,6 +35,9 @@ export default {
       }
   },
   methods: {
+      addUserAvailability(){
+        this.$router.push({name:'CalenderUser'})
+      },
       async editprofile(){
         this.$router.push({name:'CreateProfile'})
       },
